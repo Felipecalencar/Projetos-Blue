@@ -1,6 +1,9 @@
 const prompt = require ("prompt-sync")()
 console.clear()
 
+
+let pontuacao = 0
+
 console.log("Felipe, tem 29 anos, e é jogador de Poker");
 console.log("sua vida é completamente monotona e cheia do mesmo todo dia");
 console.log("Felipe tem uma namorada que o ama muito e o acompanha nas suas tomadas de decisões");  
@@ -48,10 +51,14 @@ if (pergunta5 == 1 || pergunta5 == "s" || pergunta5 == "S" || pergunta5 == "sim"
 console.clear()
 
 
-if (pontuacao <= 2) {
+if (pontuacao <= 1) {
     console.log(`\nVocê não está pronto!`)
+} else if (pontuacao == 2) {
+    console.log(`\nVocê não está pronto, mas têm potencial!`)
 } else if (pontuacao == 3) {
     console.log(`\nVocê precisa melhorar!`)
-} else if (pontuacao >= 4) {
+} else if (pontuacao == 4) {
+    console.log(`\nVocê quase conseguiu!`)
+} else if (pontuacao == 5) {
     console.log(`\nParabéns você é um heroi e conseguiu!`)
 }
