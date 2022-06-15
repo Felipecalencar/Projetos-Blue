@@ -1,0 +1,113 @@
+console.clear();
+const prompt = require("prompt-sync")();
+
+/* critérios de Avaliação
+Valor da entrega: 10 pontos.
+A avaliação será feita por entregáveis obrigatórios, cada um valerá uma quantidade de pontos, todos começarão com 0 pontos, a cada item entregue, você receberá a quantia pertinente aquela entrega.
+Permitir que eu decida quantas rodadas faremos. (1,0) ok
+Ler a minha escolha: pedra, papel ou tesoura. (2,0) ok
+Decidir de forma aleatória a decisão do computador (2,0) ok
+Mostrar quantas rodadas cada jogador ganhou (2,0) ok
+Determinar quem foi o grande campeão conforme a quantidade de vitórias de cada um (computador e jogador). (1,5) ok
+Perguntar se o Jogador quer jogar novamente, se sim, inicie volte a escolha de quantidade de rodadas, se não finalize o programa. (1,5) ok
+*/
+
+while (true) {
+  const escolha = ["PEDRA", "PAPEL", "TESOURA"];
+  const resultado = ["VOCÊ GANHOU", "VOCÊ PERDEU", "EMPATE"];
+
+  let numrodadas = 0;
+  let pontosjogador = 0;
+  let computador = 0;
+  let pontoscomputador = 0;
+  let empates = 0;
+  let possibilidade = 0;
+
+  console.log("Olá, bem vindo ao JOKENPÔ");
+
+  console.log("quantas rodadas deseja jogar?");
+  numrodadas = +prompt();
+
+  for (let i = 1; i <= numrodadas; i++) {
+    console.log();
+    console.log(`RODADA ${i}`);
+    console.log(
+      `Escolha entre pedra, papel ou tesoura?:\n[0] - ${escolha[0]} \n[1] - ${escolha[1]} \n[2] - ${escolha[2]} `
+    );
+    possibilidade = +prompt().trim();
+    let numaleatorio = Math.floor(Math.random() * 3);
+
+    while (possibilidade != 0 && possibilidade != 1 && possibilidade != 2) {
+      console.log('Responda com "0", "1" ou "2"');
+      console.log(
+        `Escolha entre pedra, papel ou tesoura?:\n[0] - PEDRA \n[1] - PAPEL \n[2] - TESOURA `
+      );
+      possibilidade = +prompt();
+    }
+
+    computador = numaleatorio;
+
+    if (
+      (computador == 0 && possibilidade == 1) ||
+      (computador == 1 && possibilidade == 2) ||
+      (computador == 2 && possibilidade == 0)
+    ) {
+      console.log(`${resultado[0]}`);
+      pontosjogador++;
+    } else if (
+      (computador == 0 && possibilidade == 2) ||
+      (computador == 1 && possibilidade == 0) ||
+      (computador == 2 && possibilidade == 1)
+    ) {
+      console.log(`${resultado[1]}`);
+      pontoscomputador++;
+    } else {
+      console.log(`${resultado[2]}`);
+      empates++;
+    }
+
+    if (numaleatorio == 0) {
+      console.log("O COMPUTADOR jogou: PEDRA");
+    } else if (numaleatorio == 1) {
+      console.log("O COMPUTADOR jogou: PAPEL");
+    } else {
+      console.log("O COMPUTADOR jogou: TESOURA");
+    }
+
+    if (possibilidade == 0) {
+      console.log("VOCÊ jogou: PEDRA");
+    } else if (possibilidade == 1) {
+      console.log("VOCÊ jogou: PAPEL");
+    } else {
+      console.log("VOCÊ jogou: TESOURA");
+    }
+  }
+
+  console.clear();
+  if (pontosjogador > pontoscomputador) {
+    console.log();
+    console.log("PARABÉNS, VOCÊ GANHOU.");
+  } else if (pontoscomputador > pontosjogador) {
+    console.log();
+    console.log("NÃO FOI DESSA VEZ, O COMPUTADOR VENCEU");
+  } else {
+    console.log();
+    console.log("UFA, DEU EMPATE.");
+  }
+
+  console.log();
+  console.log(
+    `Resultados:\nVitórias:${pontosjogador}\nEmpates:${empates} \nDerrotas:${pontoscomputador}`
+  );
+
+  let jogarnovamente = prompt(
+    "Deseja jogar novamente? [1] - SIM OU [2] - NÃO: "
+  );
+
+  if (jogarnovamente == 1) {
+    continue;
+  } else {
+    console.log("OBRIGADO, VOLTE SEMPRE");
+    break;
+  }
+}
